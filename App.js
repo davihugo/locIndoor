@@ -11,7 +11,7 @@ export default function App() {
   const [pointX, setPointX] = useState(null);
   const [pointY, setPointY] = useState(null);
 
-  
+
 
   useEffect(() => {
     (async () => {
@@ -38,7 +38,7 @@ export default function App() {
         setImageWidth(width);
         setImageHeight(height);
 
-          
+
         console.log(width);
         console.log(height);
 
@@ -51,7 +51,7 @@ export default function App() {
     const y = parseFloat(inputY);
 
     if (!isNaN(x) && !isNaN(y) && imageWidth && imageHeight) {
-      
+
       if (x >= 0 && x <= imageWidth && y >= 0 && y <= imageHeight) {
         // Normalizar as coordenadas para estar na mesma escala que a imagem
 
@@ -59,15 +59,16 @@ export default function App() {
         const normalizedY = (y / imageHeight) * Dimensions.get('window').height;
 
         console.log(imageWidth);
-        
+
         console.log(Dimensions.get('window').width);
-        
+        console.log(Dimensions.get('window').height );
+
         setPointX(normalizedX);
-        
+
         console.log(normalizedX);
-        
+
         setPointY(normalizedY);
-        
+
         console.log(normalizedY);
 
       } else {
@@ -86,7 +87,7 @@ export default function App() {
           <Image source={{ uri: selectedImage }} style={{
             width: imageWidth,
             height: imageHeight,
-          }} resizeMode="stretch" 
+          }} resizeMode="contain"
           />
           {pointX !== null && pointY !== null && (
             <View style={[styles.point, { left: pointX, top: pointY }]} />
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   input: {
-    width: 50,
+    flex: 1, // Use flex para que o tamanho se ajuste automaticamente
     height: 30,
     borderWidth: 1,
     borderColor: 'gray',
@@ -151,5 +152,6 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: 'red',
     position: 'absolute',
+
   },
 });
